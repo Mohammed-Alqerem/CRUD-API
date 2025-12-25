@@ -1,0 +1,30 @@
+
+
+const param = new URLSearchParams(location.search);
+
+
+const getUser = async ()=>{
+
+     const response= await axios.get(`http://ums12.runasp.net/api/users/${param.get("id")}`);
+     return response.data.data;
+}
+
+
+const displayUserInfo = async ()=>{
+
+    const user = await getUser();
+    console.log(user);
+
+    const res =`
+                <img src="${user.image || "./test.png"}" class="rounded-circle" width="100" height="100" alt="">
+                <h4>${user.name}</h4>
+                <h5>${user.age}</h5>
+                <h6>${user.email}</h6>
+    `;
+       
+    document.querySelector(".userInfo").innerHTML=res;
+}
+
+displayUserInfo();
+
+
