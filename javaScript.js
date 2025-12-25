@@ -17,7 +17,16 @@ const fillTableOfUser = async ()=>{
        const response = await getAllUser();
        document.querySelector(".loading").classList.add("d-none");
        const usersInfo = response.users;
+      
        
+       if(!usersInfo.length){
+         document.querySelector(".errorMessages").classList.remove("d-none");
+          document.querySelector(".errorMessages").innerHTML=`<i class="large fa-regular fa-face-dizzy"></i><br> <p>No Data Founded</p>`;
+       }
+       else{
+          document.querySelector(".errorMessages").textContent="";
+       }
+
        const result = usersInfo.map(user=>{
         return `
                 <tr>

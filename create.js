@@ -21,12 +21,15 @@ createForm.image.addEventListener("change",()=>{
 
 
 createForm.addEventListener("submit", async (e)=>{
+  
+        document.querySelector(".loading").classList.remove("d-none");
 
        e.preventDefault();
 
        const formData = new FormData(createForm);
 
        const response= await axios.post("http://ums12.runasp.net/api/users",formData);
+            document.querySelector(".loading").classList.add("d-none");
 
        location.href="./index.html";
 
