@@ -17,8 +17,7 @@ const fillTableOfUser = async ()=>{
        const response = await getAllUser();
        document.querySelector(".loading").classList.add("d-none");
        const usersInfo = response.users;
-       console.log(usersInfo);
-
+       
        const result = usersInfo.map(user=>{
         return `
                 <tr>

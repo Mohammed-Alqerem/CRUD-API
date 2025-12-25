@@ -1,5 +1,5 @@
 
-
+// Called Query String not the only ? mark ==> Be Awesome
 const param = new URLSearchParams(location.search);
 
 
@@ -13,9 +13,8 @@ const getUser = async ()=>{
 const displayUserInfo = async ()=>{
 
     const user = await getUser();
-           document.querySelector(".loading").classList.add("d-none");
-
-    console.log(user);
+    
+    document.querySelector(".loading").classList.add("d-none");
 
     const res =`
                 <img src="${user.image || "./test.png"}" class="rounded-circle" width="100" height="100" alt="">

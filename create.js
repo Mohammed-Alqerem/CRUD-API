@@ -1,6 +1,5 @@
 
 
-
  // name of the form not class or any thing 
 const createForm = document.forms["addUser"];
 
