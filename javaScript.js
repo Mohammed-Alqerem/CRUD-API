@@ -53,8 +53,16 @@ fillTableOfUser();
 // delete
 const deleteUser = async (id)=>{
 
-    const res = await axios.delete(`http://ums12.runasp.net/api/users/${id}`);
+     document.querySelector(".loading").classList.remove("d-none");
+
+     const res = await axios.delete(`http://ums12.runasp.net/api/users/${id}`);
+
+    document.querySelector(".loading").classList.add("d-none");
+
     console.log(res);
+    fillTableOfUser();
+
+
 
 
 }
