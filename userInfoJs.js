@@ -13,6 +13,8 @@ const getUser = async ()=>{
 const displayUserInfo = async ()=>{
 
     const user = await getUser();
+           document.querySelector(".loading").classList.add("d-none");
+
     console.log(user);
 
     const res =`
