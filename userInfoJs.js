@@ -5,7 +5,7 @@ const param = new URLSearchParams(location.search);
 
 const getUser = async ()=>{
 
-     const response= await axios.get(`http://ums12.runap.net/api/users/${param.get("id")}`);
+     const response= await axios.get(`http://ums12.runasp.net/api/users/${param.get("id")}`);
      return response.data.data;
 }
 
