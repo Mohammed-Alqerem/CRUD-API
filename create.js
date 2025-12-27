@@ -22,7 +22,8 @@ createForm.image.addEventListener("change",()=>{
 
 createForm.addEventListener("submit", async (e)=>{
   
-        document.querySelector(".loading").classList.remove("d-none");
+        try{
+            document.querySelector(".loading").classList.remove("d-none");
 
        e.preventDefault();
 
@@ -32,5 +33,17 @@ createForm.addEventListener("submit", async (e)=>{
             document.querySelector(".loading").classList.add("d-none");
 
        location.href="./index.html";
+        }
+        catch(error){
+         document.querySelector(".loading").classList.add("d-none");
+
+         Swal.fire({
+           icon: "error",
+           title: "Oops...",
+           text: `${error.message}`,
+
+         });
+         
+        }
 
 });

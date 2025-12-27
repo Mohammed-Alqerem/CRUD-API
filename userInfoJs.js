@@ -5,14 +5,16 @@ const param = new URLSearchParams(location.search);
 
 const getUser = async ()=>{
 
-     const response= await axios.get(`http://ums12.runasp.net/api/users/${param.get("id")}`);
+     const response= await axios.get(`http://ums12.runap.net/api/users/${param.get("id")}`);
      return response.data.data;
 }
 
 
 const displayUserInfo = async ()=>{
 
-    const user = await getUser();
+    try{
+
+        const user = await getUser();
     
     document.querySelector(".loading").classList.add("d-none");
 
@@ -24,6 +26,21 @@ const displayUserInfo = async ()=>{
     `;
        
     document.querySelector(".userInfo").innerHTML=res;
+    }catch(error){
+            document.querySelector(".loading").classList.add("d-none");
+                     document.querySelector(".errorMessages").classList.remove("d-none");
+
+            
+    document.querySelector(".errorMessages").innerHTML=`<i class="large fa-regular fa-face-dizzy"></i><br> <p>No Data Founded</p>`;
+
+
+         Swal.fire({
+           icon: "error",
+           title: "Oops...",
+           text: `${error.message}`,
+
+         });
+    }
 }
 
 displayUserInfo();
