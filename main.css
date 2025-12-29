@@ -23,3 +23,11 @@
 .large{
    font-size: 90px;
 }
+
+
+.cursor-none{
+
+   cursor: none;
+   pointer-events: none;
+
+}

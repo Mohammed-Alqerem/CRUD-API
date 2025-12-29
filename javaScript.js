@@ -1,24 +1,31 @@
 
 // get all the user
-const getAllUser= async()=>{
-
-    const result= await axios.get('http://ums12.runasp.net/api/users?limit=1000');
+const getAllUser= async(page)=>{
+  
+    const skip = (page - 1 ) * 2;
+    const result= await axios.get(`http://ums12.runasp.net/api/users?limit=2&skip=${skip}`);
     return result.data;
 
 }
 
-
 // display the user
-const fillTableOfUser = async ()=>{
-
+const fillTableOfUser = async (page = 1)=>{
 
     try{
     
-       const response = await getAllUser();
+       const response = await getAllUser(page);
+
+       // pagination to calulate the number of the page 
+
+
+         const nubmerOfPage = Math.ceil(response.totalCount / 2);
+
+
+         console.log(nubmerOfPage);
+
        document.querySelector(".loading").classList.add("d-none");
        const usersInfo = response.users;
-      
-       
+             
        if(!usersInfo.length){
          document.querySelector(".errorMessages").classList.remove("d-none");
           document.querySelector(".errorMessages").innerHTML=`<i class="large fa-regular fa-face-dizzy"></i><br> <p>No Data Founded</p>`;
@@ -41,8 +48,38 @@ const fillTableOfUser = async ()=>{
         `;
        }).join(" ");
 
-     document.querySelector(".insideRow").innerHTML=result;
+       // pagination
 
+
+       let paginationLink =``;
+
+       if(page >1){
+         paginationLink=`<li class="page-item"><button class="page-link user-select-none" onclick=fillTableOfUser(${page-1})>Previous</button></li>`;
+       }else{
+
+        paginationLink= `<li class="page-item"><button class="page-link cursor-none opacity-50 user-select-none" disabled >Previous</button></li>`;
+        
+       }
+
+       for(let i=1 ;i<=nubmerOfPage; i++){
+
+        paginationLink+=`<li class="page-item"><button class="page-link user-select-none" onclick=fillTableOfUser(${i}) >${i}</button></li>`;
+       }
+
+       if(page < nubmerOfPage){
+
+           paginationLink+=`<li class="page-item"><button class="page-link user-select-none" onclick=fillTableOfUser(${page+1}) >Next</button></li>`;
+       }else{
+
+        paginationLink+=`<li class="page-item"><button class="page-link cursor-none opacity-50  user-select-none")>Next</button></li>`;
+
+       }
+
+       document.querySelector(".pagination").innerHTML=paginationLink;
+
+// pagination
+
+     document.querySelector(".insideRow").innerHTML=result;
 
     } 
     catch(error){
