@@ -75,7 +75,14 @@ const fillTableOfUser = async (page = 1)=>{
 
        }
 
-       document.querySelector(".pagination").innerHTML=paginationLink;
+       
+       if(response.totalCount){
+           document.querySelector(".pagination").innerHTML=paginationLink;
+       }
+    else{
+        paginationLink="";
+        document.querySelector(".pagination").innerHTML=paginationLink;
+    }
 
 // pagination
 
