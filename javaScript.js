@@ -75,8 +75,9 @@ const fillTableOfUser = async (page = 1)=>{
 
        }
 
-       
-       if(response.totalCount){
+         // we put ( 2 ) because of the limit is 2 at these function  => getAllUser() 
+         
+       if(response.totalCount > 2){
            document.querySelector(".pagination").innerHTML=paginationLink;
        }
     else{
